@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>SayHello</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <!-- {{ bootstrap.load_css() }} -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    {% endblock %}
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1 class="text-center display-4">
+                <a href="{{ url_for('index') }}" class="text-success"><strong>SayHello</strong></a>
+                <small style="font-size: 24px;" class="text-muted">to the world</small>
+            </h1>
+        </header>
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-info">
+            <!-- <button class="close" type="button" data-dismiss="alert">&times;</button> -->
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        {% block content %}{% endblock %}
+        
+        <footer class="text-center">
+            {% block footer %}
+            <p><a href="#" id="bottom" title="Go Top">&uarr;</a></p>
+            <small>@2021 Minute / <a href="#">Github</a> / <a href="#">HelloFlask</a></small>
+            {% endblock %}
+        </footer>
+    </main>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <!-- <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script> -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <!-- {{ bootstrap.load_js() }} -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.js')) }}
+    {{ moment.locale(auto_detect=True) }}
+</body>
+</html>
